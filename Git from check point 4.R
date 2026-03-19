@@ -41,7 +41,7 @@ library(patchwork)
 
 ```{r}
 #set working directory
-setwd("/Users/joeladamthuo/Library/CloudStorage/OneDrive-CornellUniversity/School/Spring 1/Data Analysis with R/Check point 4")
+setwd("/Users/joeladamthuo/Desktop/R/March-17th-class")
 
 check4 <- read.csv("sim_summary.csv")
 
