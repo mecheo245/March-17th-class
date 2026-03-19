@@ -16,20 +16,17 @@ editor_options:
 urlcolor: blue
 ---
   
-  ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-```
 
 #Introduction:
 
-**I chose this data set because I am interested in understanding how smoking rates more so among young adults and college students in my generation. I was hoping to find data representing my interests but I couldn't find one so I settled on what I could find and what was closest.**
+#I chose this data set because I am interested in understanding how smoking rates more so among young adults and college students in my generation. I was hoping to find data representing my interests but I couldn't find one so I settled on what I could find and what was closest.**
 
-Project Question: **How has smoking behavior changed across U.S. states over time, and what is the relationship between the percentage of adults who never smoked and those who are former smokers?**
+#Project Question: **How has smoking behavior changed across U.S. states over time, and what is the relationship between the percentage of adults who never smoked and those who are former smokers?**
 
-Data set overview : **The dataset comes from the U.S. Centers for Disease Control and Prevention (CDC) Behavioral Risk Factor Surveillance System (BRFSS). It includes estimates of the prevalence of smoking among adult Americans at the state level. All U.S. states' non-institutionalized adults who are at least 18 years old make up the research population. Telephone surveys were used to gather data every year from 1995 to 2010. In order to compare smoking habits across states and over time, the dataset provides percentages of adults who are categorized as never smokers, former smokers, and current smokers.**
+#Data set overview : **The dataset comes from the U.S. Centers for Disease Control and Prevention (CDC) Behavioral Risk Factor Surveillance System (BRFSS). It includes estimates of the prevalence of smoking among adult Americans at the state level. All U.S. states' non-institutionalized adults who are at least 18 years old make up the research population. Telephone surveys were used to gather data every year from 1995 to 2010. In order to compare smoking habits across states and over time, the dataset provides percentages of adults who are categorized as never smokers, former smokers, and current smokers.**
   
-  #Loading libraries
-  ```{r}
+#Loading libraries
+
 #install janitor
 library(janitor)
 #install ggplot2
@@ -41,13 +38,13 @@ library(dplyr)
 
 install.packages(k)
 
-```
+
 
 #Loading Data
-```{r, results='hide'}
+
 
 #set up directory
-setwd("/Users/joeladamthuo/Library/CloudStorage/OneDrive-CornellUniversity/School/Spring 1/Data Analysis with R/Check point 2/CSVs")
+setwd("/Users/joeladamthuo/Desktop/R/March-17th-class")
 
 #load file
 tobacco_prevelance <- read.csv("BRFSS_Prevalence_and_Trends_Data__Tobacco_Use_-_Four_Level_Smoking_Data_for_1995-2010_20260127.csv")
@@ -55,11 +52,11 @@ tobacco_prevelance <- read.csv("BRFSS_Prevalence_and_Trends_Data__Tobacco_Use_-_
 #preview data
 head(tobacco_prevelance)
 
-```
 
 
 
-```{r, results='hide'}
+
+
 #Clean names
 tobacco_prevelance <- tobacco_prevelance %>%
   clean_names()
@@ -102,10 +99,7 @@ variable_table <- data.frame(
   Class = sapply(tobacco_sub, class)
 )
 
-```
 
-
-```{r}
 
 #Print table with caption
 knitr::kable(
@@ -113,11 +107,11 @@ knitr::kable(
   caption = "Table 1. Description of variables included in the tobacco prevalence dataset subset"
 )
 
-```
 
 
-Data Visualization (Histogram)
-```{r, results='hide'}
+
+#Data Visualization (Histogram)
+
 #Making Former smoker a percentage
 tobacco_sub <- tobacco_sub %>%
   mutate(
@@ -158,11 +152,11 @@ ggplot(tobacco_sub, aes(x = former_smoker)) +
   theme_minimal()
 
 
-```
+
 
 #Data Visualization (Scatter plot)
 
-```{r, results='hide'}
+
 #Making never smoked into a percentage
 tobacco_sub <- tobacco_sub %>%
   mutate(
@@ -186,24 +180,24 @@ ggplot(tobacco_sub, aes(x = never_smoked, y= former_smoker))+
   
   theme_minimal()
 
-```
+
 
 
 #AI Use Disclosure Statement
 
-*As part of this assignment, please indicate whether you used any AI-based tools (e.g., ChatGPT, Claude, Copilot, Gemini, etc.). Indicate:*
+As part of this assignment, please indicate whether you used any AI-based tools (e.g., ChatGPT, Claude, Copilot, Gemini, etc.). Indicate:*
   
-  * *Did you use AI? Yes / No*
+  **Did you use AI? Yes / No*
   
   **yes**
   
-  * *If yes: Write a short disclosure statement (2–3 sentences) describing:*
+  **If yes: Write a short disclosure statement (2–3 sentences) describing:*
   
   
-  * *Which tool(s) you used.*
+  **Which tool(s) you used.*
   
   
-  * *How you used it (e.g., to help decide on an analysis approach, to generate a first draft of code, to improve or debug code you had written yourself, etc.).*
+  **How you used it (e.g., to help decide on an analysis approach, to generate a first draft of code, to improve or debug code you had written yourself, etc.).*
   
   
   *Example: “This document was generated using Claude to generate original code, which was then reviewed and adjusted” or "This document was generate using ChatGPT to assist with debugging of code generated by the author".*
