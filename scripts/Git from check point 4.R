@@ -1,29 +1,12 @@
----
-  title: "VTPEH 6270 - Git from check point 4"
-author: "Joel Adam Thuo"
-date: "`r Sys.Date()`"
-output:
-  pdf_document:
-  toc: true
-toc_depth: 1
-number_sections: true
-latex_engine: xelatex
-html_document:
-  toc: true
-toc_depth: '1'
-df_print: paged
-editor_options:
-  chunk_output_type: console
-urlcolor: blue
----
-  
-  ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-```
+############################################
+# VTPEH 6270 - Check Point 4
+# Author: Joel Adam Thuo
+# Date: 2026-03-20
+############################################
 
 
 #Loading relevant libraries
-```{r, results='hide'}
+
 
 #install janitor
 library(janitor)
@@ -37,25 +20,24 @@ library(dplyr)
 #install.packages("patchwork")
 library(patchwork)
 
-```
 
-```{r}
+
 #set working directory
-setwd("/Users/joeladamthuo/Desktop/R/March-17th-class")
+#setwd("/Users/joeladamthuo/Desktop/R/March-17th-class")
 
-check4 <- read.csv("sim_summary.csv")
+check4 <- read.csv("data/sim_summary.csv")
 
 head(check4)
 names(check4)
-```
+
 
 #Research question
 
-Is milk fat concentration different between populations with high cheese consumption compared to populations with low cheese consumption?
-  
-  
-  #Data description
-  ```{r}
+#Is milk fat concentration different between populations with high cheese consumption compared to populations with low cheese consumption?
+
+
+#Data description
+
 data_description <- data.frame(
   Variable_Name = c("beta", "sample", "sim", "high_cheese_mean", 
                     "high_cheese_sd", "low_cheese_mean", "low_cheese_sd", "p"),
@@ -68,12 +50,19 @@ data_description <- data.frame(
 )
 
 data_description
-```
+
+
+#Create output folder
+dir.create("outputs/figures", recursive = TRUE, showWarnings = FALSE)
+
 
 #Data visualization
-```{r}
+
 check4 <- check4 %>%
   mutate(mean_difference = high_cheese_mean - low_cheese_mean)
+
+#Save first plot
+png("outputs/figures/cheese_effect_plot.png", width = 800, height = 600)
 
 ggplot(check4, aes(x = beta, y = mean_difference)) +
   geom_point(alpha = 0.4) +
@@ -84,14 +73,16 @@ ggplot(check4, aes(x = beta, y = mean_difference)) +
     title = "Simulated Effect of Cheese Consumption on Milk Fat"
   ) +
   theme_bw()
-```
+
+dev.off()
+
 
 #Description of Plausible Relationships
 
-The simulated data suggest that milk fat concentration differs between high cheese and low cheese consumption groups. As the effect size parameter (β) increases, the mean milk fat in the high cheese group becomes larger relative to the low cheese group. This represents a positive relationship between cheese consumption and milk fat concentration.
+#The simulated data suggest that milk fat concentration differs between high cheese and low cheese consumption groups. As the effect size parameter (β) increases, the mean milk fat in the high cheese group becomes larger relative to the low cheese group. This represents a positive relationship between cheese consumption and milk fat concentration.
 
 #Parameters of interest
-```{r}
+
 parameters <- data.frame(
   Parameter = c("Effect size", "Sample size", "Noise"),
   Symbol = c("β", "n", "ε"),
@@ -101,11 +92,14 @@ parameters <- data.frame(
 )
 
 parameters
-```
+
 
 
 #Final visualization
-```{r}
+
+#Save second plot
+png("outputs/figures/pvalue_vs_beta.png", width = 800, height = 600)
+
 ggplot(check4, aes(x = beta, y = p)) +
   geom_point(alpha = 0.3) +
   geom_smooth() +
@@ -116,14 +110,15 @@ ggplot(check4, aes(x = beta, y = p)) +
     title = "Effect Size and Sample Size Influence Statistical Significance"
   ) +
   theme_bw()
-```
+
+dev.off()
+
 
 
 #Interpretation
 
-The simulations show that statistical power increases as effect size and sample size increase. When β is small, differences between high and low cheese groups are difficult to detect and p-values are often large. As β increases, the difference between groups becomes more apparent and p-values decrease. Larger sample sizes further improve the ability to detect these differences. This demonstrates how both biological effect size and sampling effort influence statistical test performance.
+#The simulations show that statistical power increases as effect size and sample size increase. When beta is small, differences between high and low cheese groups are difficult to detect and p-values are often large. As β increases, the difference between groups becomes more apparent and p-values decrease. Larger sample sizes further improve the ability to detect these differences. This demonstrates how both biological effect size and sampling effort influence statistical test performance.
 
 ## AI Disclosure
 
-**This document was generated using ChatGPT and Gemini. I used them as a teaching assistant. To understand what certain pieces of code do. How they affect the line if they are used differently and also to identify pieces of code I couldn't figure out**
-
+#TThis document was generated using ChatGPT and Gemini. I used them as a teaching assistant. To understand what certain pieces of code do. How they affect the line if they are used differently and also to identify pieces of code I couldn't figure out
