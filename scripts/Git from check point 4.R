@@ -64,15 +64,17 @@ check4 <- check4 %>%
 #Save first plot
 png("outputs/figures/cheese_effect_plot.png", width = 800, height = 600)
 
-ggplot(check4, aes(x = beta, y = mean_difference)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(
-    x = "Effect Size (Beta)",
-    y = "Difference in Milk Fat (High Cheese - Low Cheese)",
-    title = "Simulated Effect of Cheese Consumption on Milk Fat"
-  ) +
-  theme_bw()
+print(
+  ggplot(check4, aes(x = beta, y = mean_difference)) +
+    geom_point(alpha = 0.4) +
+    geom_smooth(method = "lm", se = FALSE) +
+    labs(
+      x = "Effect Size (Beta)",
+      y = "Difference in Milk Fat (High Cheese - Low Cheese)",
+      title = "Simulated Effect of Cheese Consumption on Milk Fat"
+    ) +
+    theme_bw()
+)
 
 dev.off()
 
@@ -100,16 +102,18 @@ parameters
 #Save second plot
 png("outputs/figures/pvalue_vs_beta.png", width = 800, height = 600)
 
-ggplot(check4, aes(x = beta, y = p)) +
-  geom_point(alpha = 0.3) +
-  geom_smooth() +
-  facet_wrap(~sample) +
-  labs(
-    x = "Effect Size (Beta)",
-    y = "P-value",
-    title = "Effect Size and Sample Size Influence Statistical Significance"
-  ) +
-  theme_bw()
+print(
+  ggplot(check4, aes(x = beta, y = p)) +
+    geom_point(alpha = 0.3) +
+    geom_smooth() +
+    facet_wrap(~sample) +
+    labs(
+      x = "Effect Size (Beta)",
+      y = "P-value",
+      title = "Effect Size and Sample Size Influence Statistical Significance"
+    ) +
+    theme_bw()
+)
 
 dev.off()
 
@@ -120,5 +124,4 @@ dev.off()
 #The simulations show that statistical power increases as effect size and sample size increase. When beta is small, differences between high and low cheese groups are difficult to detect and p-values are often large. As β increases, the difference between groups becomes more apparent and p-values decrease. Larger sample sizes further improve the ability to detect these differences. This demonstrates how both biological effect size and sampling effort influence statistical test performance.
 
 ## AI Disclosure
-
-#TThis document was generated using ChatGPT and Gemini. I used them as a teaching assistant. To understand what certain pieces of code do. How they affect the line if they are used differently and also to identify pieces of code I couldn't figure out
+#This document was generated using ChatGPT and Gemini. I used them as a teaching assistant. To understand what certain pieces of code do. How they affect the line if they are used differently and also to identify pieces of code I couldn't figure out

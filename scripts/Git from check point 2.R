@@ -114,41 +114,36 @@ median_former <- median(tobacco_sub$former_smoker, na.rm = TRUE)
 #Save histogram
 png("outputs/figures/former_smoker_hist.png", width = 800, height = 600)
 
-#Histogram of former smokers
-ggplot(tobacco_sub, aes(x = former_smoker)) +
-  
-  geom_histogram(
-    binwidth = 2, 
-    fill = "lightblue", 
-    color = "black") +
-  
-  geom_vline(
-    aes(xintercept = mean_former, color = "Mean"), 
-    linewidth = 1.2) +
-  
-  geom_vline(
-    aes(xintercept = median_former, color = "Median"), 
-    linewidth = 1.2, linetype = "dashed") +
-  
-  scale_x_continuous(labels = function(x) paste0(x, "%")) +
-  
-  labs(
-    title = "Distribution of Adults Who Are Former Smokers",
-    x = "Percentage of Adults Who Are Former Smokers (%)",
-    y = "Count",
-    color = "Statistic",
-    caption = "Data source: BRFSS Tobacco Use Data (1995–2010)"
-  ) +
-  
-  
-  theme_minimal()
+print(
+  ggplot(tobacco_sub, aes(x = former_smoker)) +
+    geom_histogram(
+      binwidth = 2,
+      fill = "lightblue",
+      color = "black"
+    ) +
+    geom_vline(
+      aes(xintercept = mean_former, color = "Mean"),
+      linewidth = 1.2
+    ) +
+    geom_vline(
+      aes(xintercept = median_former, color = "Median"),
+      linewidth = 1.2,
+      linetype = "dashed"
+    ) +
+    scale_x_continuous(labels = function(x) paste0(x, "%")) +
+    labs(
+      title = "Distribution of Adults Who Are Former Smokers",
+      x = "Percentage of Adults Who Are Former Smokers (%)",
+      y = "Count",
+      color = "Statistic",
+      caption = "Data source: BRFSS Tobacco Use Data (1995–2010)"
+    ) +
+    theme_minimal()
+)
 
 dev.off()
 
-
-
 #Data Visualization (Scatter plot)
-
 
 #Making never smoked into a percentage
 tobacco_sub <- tobacco_sub %>%
@@ -160,25 +155,21 @@ tobacco_sub <- tobacco_sub %>%
 #Save scatter plot
 png("outputs/figures/never_vs_former_scatter.png", width = 800, height = 600)
 
-ggplot(tobacco_sub, aes(x = never_smoked, y= former_smoker))+
-  
-  geom_point(alpha = 0.6)+
-  
-  scale_x_continuous(labels = function(x) paste0(x, "%"))+
-  scale_y_continuous(labels = function(x) paste0(x, "%"))+
-  
-  labs(
-    title = "Relationship Between Never Smokers and Former Smokers",
-    x = "Adults who never smoked (%)",
-    y = "Adults who are Former smokers (%)",
-    caption = "Data source: BRFSS Tobacco Use Data (1995–2010)"
-  )+
-  
-  theme_minimal()
+print(
+  ggplot(tobacco_sub, aes(x = never_smoked, y = former_smoker)) +
+    geom_point(alpha = 0.6) +
+    scale_x_continuous(labels = function(x) paste0(x, "%")) +
+    scale_y_continuous(labels = function(x) paste0(x, "%")) +
+    labs(
+      title = "Relationship Between Never Smokers and Former Smokers",
+      x = "Adults who never smoked (%)",
+      y = "Adults who are Former smokers (%)",
+      caption = "Data source: BRFSS Tobacco Use Data (1995–2010)"
+    ) +
+    theme_minimal()
+)
 
 dev.off()
-
-
 
 #AI Use Disclosure Statement
 
